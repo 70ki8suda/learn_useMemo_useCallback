@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useCallback } from 'react';
+
+import Child from './Child';
 
 function App() {
+  const [count, setCount] = useState(0);
+  const [inputState, setInputState] = useState('');
+  const addCountHandler = useCallback(() => {
+    setCount(count + 1);
+  }, [count]);
+  // const addCountHandler = () => {
+  //   setCount(count + 1);
+  // };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <div>Count: {count}</div>
+      <input type='text' onChange={(e) => setInputState(e.target.value)} />
+
+      <Child addCountHandler={addCountHandler} />
     </div>
   );
 }
